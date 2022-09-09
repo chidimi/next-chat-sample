@@ -10,7 +10,7 @@ import { Clock } from "../components/tick";
 import { useChat } from "../hooks/useChat";
 import styles from "../styles/Home.module.css";
 
-export const Chat: NextPage = () => {
+const Chat: NextPage = () => {
   const messageRef = useRef<HTMLInputElement>(null);
   const { messages, sendMessage } = useChat(messageRef);
 
@@ -28,3 +28,5 @@ export const Chat: NextPage = () => {
     </>
   );
 };
+
+export default Chat;
