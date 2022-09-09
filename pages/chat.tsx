@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { ChatInput } from "../components/chat/ChatInput";
 import { ChatOutput } from "../components/chat/ChatOutput";
+import { Layout } from "../components/layout";
 import { Clock } from "../components/tick";
 import { useChat } from "../hooks/useChat";
 import styles from "../styles/Home.module.css";
@@ -17,14 +18,10 @@ const Chat: NextPage = () => {
   return (
     <>
       <ChatOutput messages={messages} />
-      <ChatInput ref={messageRef} />
-      <button
-        onClick={() => {
-          sendMessage(messageRef.current?.value);
-        }}
-      >
-        send
-      </button>
+      <ChatInput
+        ref={messageRef}
+        sendMessage={() => sendMessage(messageRef.current?.value)}
+      />
     </>
   );
 };
