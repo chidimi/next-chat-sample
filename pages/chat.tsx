@@ -16,13 +16,15 @@ const Chat: NextPage = () => {
   const { messages, sendMessage } = useChat(messageRef);
 
   return (
-    <>
-      <ChatOutput messages={messages} />
-      <ChatInput
-        ref={messageRef}
-        sendMessage={() => sendMessage(messageRef.current?.value)}
-      />
-    </>
+    <div className="h-1/3">
+      <div className="flex-1 p:2 sm:p-6 justify-between flex flex-col h-screen">
+        <ChatOutput messages={messages} />
+        <ChatInput
+          ref={messageRef}
+          sendMessage={() => sendMessage(messageRef.current?.value)}
+        />
+      </div>
+    </div>
   );
 };
 

@@ -2,17 +2,18 @@ import dayjs from "dayjs";
 import { RefObject, useEffect, useRef, useState } from "react";
 import socketIOClient, { Socket } from "socket.io-client";
 
-type ReceivedMessage = {
+export type ReceivedMessage = {
   userName: string;
   time: string;
   body: string;
   socketId: string;
+  ownedByCurrentUser: boolean;
 };
 
 const SOCKET_SERVER_URL = "http://localhost:3001";
 
 export const useChat = (messageRef: RefObject<HTMLInputElement>) => {
-  const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<ReceivedMessage[]>([]);
   const socketRef = useRef<Socket>();
 
   useEffect(() => {
@@ -33,7 +34,7 @@ export const useChat = (messageRef: RefObject<HTMLInputElement>) => {
           ownedByCurrentUser:
             receivedMessage.socketId === socketRef.current?.id,
         };
-        setMessages([...messages, incomingMessage.body]);
+        setMessages([...messages, incomingMessage]);
         messageRef.current!.value = "";
       }
     );
